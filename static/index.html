@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go URL Shortener</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">Go URL Shortener</h1>
+                <form id="url-form">
+                    <div class="form-group">
+                        <label for="url">URL to shorten</label>
+                        <input type="text" id="url" class="form-control" placeholder="Enter URL">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Shorten</button>
+                </form>
+                <div class="form-group mt-3" id="result" style="display: none;">
+                    <label for="short-url">Short URL:</label>
+                    <a id="short-url"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
