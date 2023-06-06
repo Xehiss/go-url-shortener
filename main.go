@@ -122,6 +122,24 @@ func isValidURL(urlStr string) bool {
 	return err == nil && u.Scheme != "" && u.Host != ""
 }
 
+func setupDatabase(db *sql.DB) {
+    createTableSQL := `CREATE TABLE IF NOT EXISTS urls (
+        "hash" TEXT NOT NULL PRIMARY KEY,		
+        "url" TEXT NOT NULL,
+        "expires_at" DATETIME
+    );`
+
+    statement, err := db.Prepare(createTableSQL) 
+    if err != nil {
+        log.Fatalf("Failed to prepare database setup statement: %v", err)
+    }
+
+    _, err = statement.Exec()
+    if err != nil {
+        log.Fatalf("Failed to setup database: %v", err)
+    }
+}
+
 
 func main() {
 	// Database setup
@@ -130,6 +148,7 @@ func main() {
 		log.Fatalf("Failed to setup database: %v", err)
 	}
 
+    setupDatabase(db)
 	// Serve static files
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fs)
